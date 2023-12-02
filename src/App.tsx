@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {Auth} from './components/auth';
 import {db} from './config/firebase'
-import {getDocs, collection} from 'firebase/firestore'
+import {collection, getDocs} from 'firebase/firestore'
+import {Header} from './app/ui/Header';
+import {Registration} from './features/auth/ui/registration/Registration';
 
 type ProductType = {
     description: string
@@ -34,7 +35,10 @@ function App() {
 
     return (
         <div className="App">
-            <Auth/>
+
+           <Header />
+
+            <Registration />
 
             <h1> Data from data base</h1>
 

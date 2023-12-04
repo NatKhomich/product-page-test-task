@@ -3,10 +3,12 @@ import {ThunkDispatch} from 'redux-thunk';
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {configureStore} from '@reduxjs/toolkit';
 import {authSlice} from '../../features/auth/model/authSlice';
+import {appSlice} from './appSlice';
 
 
 const rootReducer = combineReducers({
-    auth: authSlice
+    auth: authSlice,
+    app: appSlice
 })
 
 export const store = configureStore({

@@ -1,19 +1,21 @@
 import React from 'react';
 import {Button, FormControl, FormGroup, Grid, Paper, TextField} from '@mui/material';
 import {useFormik} from 'formik';
-import {useAppDispatch} from '../../../../app/model/store';
+import {useAppDispatch, useAppSelector} from '../../../../app/model/store';
 import {authThunks} from '../../model/authSlice';
 import googleImg from '../../../../common/image/registerGoogle.png'
 import {auth, googleProvider} from '../../../../config/firebase';
 import {signInWithPopup} from 'firebase/auth';
+import {Navigate} from 'react-router-dom';
 
 export type RegistrationProps = {
     email: string;
     password: string;
 };
 
-export const Registration = () => {
+export const Login = () => {
 
+    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
     const dispatch = useAppDispatch()
 
     const formik = useFormik({
@@ -55,10 +57,13 @@ export const Registration = () => {
         }
     };
 
+    // if (isLoggedIn) {
+    //     return <Navigate to={"/"} />
+    // }
+
     return (
         <div>
-            <h2>Registration</h2>
-            <Grid container justifyContent={"center"}>
+            <Grid container justifyContent={"center"} marginTop={'150px'}>
                 <Paper sx={{padding: '40px'}}>
                     <form onSubmit={formik.handleSubmit}>
                         <FormControl>
@@ -84,10 +89,10 @@ export const Registration = () => {
 
                                 <Button type={"submit"}
                                         variant={"contained"}
-                                        color={"primary"}
+                                        color={"success"}
                                         disabled={!(formik.isValid && formik.dirty)}
                                 >
-                                    Register
+                                    Login
                                 </Button>
                             </FormGroup>
                         </FormControl>
@@ -96,44 +101,4 @@ export const Registration = () => {
             </Grid>
         </div>
     );
-
 };
-
-{/*<input*/}
-{/*    placeholder={'Email'}*/}
-{/*    onChange={(e) => {*/}
-{/*        setEmail(e.currentTarget.value);*/}
-{/*    }}*/}
-{/*/>*/}
-{/*<input*/}
-{/*    placeholder={'Password'}*/}
-{/*    type="password"*/}
-{/*    onChange={(e) => setPassword(e.currentTarget.value)}*/}
-{/*/>*/}
-{/*<button onClick={signInHandler}>Sign In</button>*/}
-{/*<div>*/}
-{/*    <button onClick={signInGoogle}>Sign In With Google</button>*/}
-{/*</div>*/}
-
-{/*<div>*/}
-{/*    <button onClick={logoutHandler}>Logout</button>*/}
-{/*</div>*/}
-
-// const signInHandler = async () => {
-//     try {
-//         await createUserWithEmailAndPassword(auth, email, password);
-//     } catch (e) {
-//         console.log(e);
-//     }
-// };
-// const logoutHandler = async () => {
-//     try {
-//         await signOut(auth);
-//     } catch (e) {
-//         console.log(e);
-//     }
-// };
-
-
-// const [email, setEmail] = useState('');
-// const [password, setPassword] = useState('');

@@ -8,11 +8,12 @@ import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {signOut} from 'firebase/auth';
 import {auth} from '../../config/firebase';
-import {useAppDispatch} from '../model/store';
+import {useAppDispatch, useAppSelector} from '../model/store';
 import {authThunks} from '../../features/auth/model/authSlice';
 
 export const Header = () => {
 
+    const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
     const dispatch = useAppDispatch()
 
     const logoutHandler = () => {
@@ -34,9 +35,9 @@ export const Header = () => {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Product
                 </Typography>
-                <Button color="inherit">Login</Button>
+                {/*<Button color="inherit">Login</Button>*/}
 
-                <Button color="inherit" onClick={logoutHandler}>Logout</Button>
+                {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Logout</Button>}
                 <AddShoppingCartIcon sx={{cursor: 'pointer', width: '100px'}}/>
             </Toolbar>
         </AppBar>

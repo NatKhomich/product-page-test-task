@@ -1,16 +1,13 @@
 .App {
-}
 
+}
 
 .lists {
     display: flex;
     flex-wrap: wrap;
-
-}
-
-.item {
-    border: 2px solid #b79c74;
+    justify-content: space-evenly;
+    align-items: center;
     margin: 20px;
-    padding: 20px;
 
 }
+

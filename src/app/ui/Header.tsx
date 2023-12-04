@@ -6,8 +6,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import {signOut} from 'firebase/auth';
-import {auth} from '../../config/firebase';
 import {useAppDispatch, useAppSelector} from '../model/store';
 import {authThunks} from '../../features/auth/model/authSlice';
 
@@ -21,7 +19,7 @@ export const Header = () => {
     };
 
     return (
-        <AppBar position="static" sx={{ background: '#2E3B55' }}>
+        <AppBar position="static" sx={{ background: '#563c86' }}>
             <Toolbar>
                 <IconButton
                     size="large"
@@ -35,8 +33,6 @@ export const Header = () => {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Product
                 </Typography>
-                {/*<Button color="inherit">Login</Button>*/}
-
                 {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Logout</Button>}
                 <AddShoppingCartIcon sx={{cursor: 'pointer', width: '100px'}}/>
             </Toolbar>

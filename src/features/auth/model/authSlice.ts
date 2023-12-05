@@ -9,7 +9,8 @@ import {appActions} from '../../../app/model/appSlice';
 const signIn = createAppAsyncThunk<
     { isLoggedIn: boolean },
     RegistrationProps
->('auth/login', async (arg, {rejectWithValue}) => {
+>('auth/login', async (arg, {dispatch, rejectWithValue}) => {
+    dispatch(appActions.setAppStatus({ status: 'loading' }))
     try {
         await signInWithEmailAndPassword(auth, arg.email, arg.password);
         return {isLoggedIn: true}
@@ -17,11 +18,15 @@ const signIn = createAppAsyncThunk<
         console.log(e);
         return rejectWithValue(null)
     }
+    finally {
+        dispatch(appActions.setAppStatus({ status: 'idle' }))
+    }
 })
 
 const logout = createAppAsyncThunk<
     { isLoggedIn: boolean }
->('auth/logout', async (_, {rejectWithValue}) => {
+>('auth/logout', async (_, {dispatch, rejectWithValue}) => {
+    dispatch(appActions.setAppStatus({ status: 'loading' }))
     try {
         await signOut(auth);
         return {isLoggedIn: false}
@@ -29,17 +34,24 @@ const logout = createAppAsyncThunk<
         console.log(e);
         return rejectWithValue(null)
     }
+    finally {
+        dispatch(appActions.setAppStatus({ status: 'idle' }))
+    }
 })
 
 const signInGoogle = createAppAsyncThunk<
     { isLoggedIn: boolean }
->('auth/signInGoogle', async (_, {rejectWithValue}) => {
+>('auth/signInGoogle', async (_, {dispatch, rejectWithValue}) => {
+    dispatch(appActions.setAppStatus({ status: 'loading' }))
     try {
         await signInWithPopup(auth, googleProvider);
         return {isLoggedIn: true}
     } catch (e) {
         console.log(e);
         return rejectWithValue(null)
+    }
+    finally {
+        dispatch(appActions.setAppStatus({ status: 'idle' }))
     }
 })
 
@@ -78,22 +90,12 @@ const slice = createSlice({
             .addCase(signIn.fulfilled, (state, action) => {
                 state.isLoggedIn = action.payload.isLoggedIn;
             })
+            .addCase(signInGoogle.fulfilled, (state, action) => {
+                state.isLoggedIn = action.payload.isLoggedIn;
+            })
             .addCase(logout.fulfilled, (state, action) => {
                 state.isLoggedIn = action.payload.isLoggedIn;
             });
-
-        // .addCase(checkAuthStatus.pending, (state) => {
-        //     state.status = true;
-        //     state.error = null;
-        // })
-        // .addCase(checkAuthStatus.fulfilled, (state, action) => {
-        //     state.isLoggedIn = !!action.payload; // Обновите здесь
-        //     state.status = false;
-        // })
-        // .addCase(checkAuthStatus.rejected, (state, action) => {
-        //     state.status = false;
-        //     state.error = action.error.message;
-        // })
     }
 })
 
@@ -103,20 +105,3 @@ export const authThunks = {logout, signInGoogle, signIn, checkAuthStatus}
 
 // types
 export type AuthStateType = ReturnType<typeof slice.getInitialState>
-
-
-
-
-// const createAnAccount = createAppAsyncThunk<
-//     { isLoggedIn: boolean },
-//     RegistrationProps
-// >("auth/login", async (arg, thunkAPI) => {
-//     const { dispatch, rejectWithValue } = thunkAPI
-//     try {
-//         await createUserWithEmailAndPassword(auth, arg.email, arg.password);
-//         return {isLoggedIn: true}
-//     } catch (e) {
-//         console.log(e);
-//         return rejectWithValue(null)
-//     }
-// })

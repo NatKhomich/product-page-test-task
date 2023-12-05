@@ -8,15 +8,25 @@ import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {useAppDispatch, useAppSelector} from '../model/store';
 import {authThunks} from '../../features/auth/model/authSlice';
+import {useNavigate} from 'react-router-dom';
 
 export const Header = () => {
 
     const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
     const logoutHandler = () => {
         dispatch(authThunks.logout())
     };
+
+   const openProductHandler = () => {
+       navigate('/')
+   }
+
+    const openBasketHandler = () => {
+        navigate('/basket')
+    }
 
     return (
         <AppBar position="static" sx={{ background: '#563c86' }}>
@@ -30,11 +40,15 @@ export const Header = () => {
                 >
                     <MenuIcon />
                 </IconButton>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                <Typography onClick={openProductHandler} variant="h6" component="div" sx={{ flexGrow: 1 , cursor: 'pointer'}}>
                     Product
                 </Typography>
                 {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Logout</Button>}
-                <AddShoppingCartIcon sx={{cursor: 'pointer', width: '100px'}}/>
+
+                <div onClick={openBasketHandler}>
+                    <AddShoppingCartIcon sx={{cursor: 'pointer', width: '100px'}}/>
+                </div>
+
             </Toolbar>
         </AppBar>
     );

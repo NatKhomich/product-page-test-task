@@ -57,9 +57,9 @@ export const Login = () => {
         }
     };
 
-    // if (isLoggedIn) {
-    //     return <Navigate to={"/"} />
-    // }
+    if (isLoggedIn) {
+        return <Navigate to={"/"} />
+    }
 
     return (
         <div>

@@ -1,29 +1,23 @@
-import React, {useEffect, useState} from 'react';
-import {ProductType} from '../../../App';
-import {collection, getDocs} from 'firebase/firestore';
-import {db} from '../../../config/firebase';
+import React, {useEffect} from 'react';
 import {Product} from './Product/Product';
 import {Grid, Paper} from '@mui/material';
+import {Navigate} from 'react-router-dom';
+import {useAppDispatch, useAppSelector} from '../../../app/model/store';
+import {productThunks} from '../model/productSlice';
 
 export const ProductsList = () => {
 
-    const [productList, setProductList] = useState<Partial<ProductType>[]>([]);
-
-    const productCollectionRef = collection(db, 'product')
+    const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+    const productList = useAppSelector((state) => state.product.productList);
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
-        const getProductList = async () => {
-            try {
-                const data = await getDocs(productCollectionRef)
-                const filteredData = data.docs.map(el => ({...el.data(), id: el.id}))
-                console.log(filteredData)
-                setProductList(filteredData)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        getProductList()
+        dispatch(productThunks.fetchProductList())
     }, [])
+
+    if (!isLoggedIn) {
+        return <Navigate to={"/login"} />
+    }
 
     return (
         <div className="lists">
@@ -31,9 +25,7 @@ export const ProductsList = () => {
                     return (
                         <Grid item key={p.id} className={'product'}>
                             <Paper>
-
                                 <Product item={p}/>
-
                             </Paper>
                         </Grid>
                     )

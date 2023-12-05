@@ -4,8 +4,10 @@ import {Header} from './app/ui/Header';
 import {Login} from './features/auth/ui/login/Login';
 import {useAppDispatch, useAppSelector} from './app/model/store';
 import {authThunks} from './features/auth/model/authSlice';
-import {CircularProgress} from '@mui/material';
+import {CircularProgress, LinearProgress} from '@mui/material';
 import {ProductsList} from './features/ProductsList/ui/ProductsList';
+import {Route, Routes} from 'react-router-dom';
+import {Basket} from './features/basket/ui/Basket';
 
 export type ProductType = {
     description: string
@@ -17,7 +19,7 @@ export type ProductType = {
 
 function App() {
 
-    const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+    const status = useAppSelector((state) => state.app.status);
     const isInitialized = useAppSelector((state) => state.app.isInitialized);
 
     const dispatch = useAppDispatch()
@@ -27,23 +29,25 @@ function App() {
             await dispatch(authThunks.checkAuthStatus({}));
         }
         checkStatus()
-    }, []);
+        console.log('google login')
+    }, [dispatch]);
 
 
     if (!isInitialized) {
-        return <div style={{ position: "fixed", top: "30%", textAlign: "center", width: "100%" }}>
-            <CircularProgress />
+        return <div style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
+            <CircularProgress/>
         </div>
     }
 
     return (
         <>
             <Header/>
-            {!isLoggedIn ?
-                <Login/>
-                :
-               <ProductsList />
-            }
+            {status === "loading" && <LinearProgress color={'primary'}/>}
+            <Routes>
+                <Route path={'/'} element={<ProductsList/>}/>
+                <Route path={'/login'} element={<Login/>}/>
+                <Route path={'/basket'} element={<Basket />}/>
+            </Routes>
         </>
     );
 }

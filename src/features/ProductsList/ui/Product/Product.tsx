@@ -4,7 +4,7 @@ import {Button} from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import styles from './Product.module.css'
 import {useAppDispatch} from '../../../../app/model/store';
-import {basketActions} from '../../../basket/model/basketSlice';
+import {basketProductActions} from '../../../basket/model/basketProductSlice';
 
 type Props = {
     item: Partial<ProductType>
@@ -14,7 +14,7 @@ export const Product = ({item}: Props) => {
     const dispatch = useAppDispatch();
 
     const addToBasketHandler = (id: string) => {
-        dispatch(basketActions.addToBasket(id));
+        dispatch(basketProductActions.addToBasket({id}));
     }
 
     return (

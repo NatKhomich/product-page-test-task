@@ -13,6 +13,7 @@ import {useNavigate} from 'react-router-dom';
 export const Header = () => {
 
     const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+    const total = useAppSelector((state) => state.basket.total);
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
@@ -45,10 +46,10 @@ export const Header = () => {
                 </Typography>
                 {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Logout</Button>}
 
-                <div onClick={openBasketHandler}>
-                    <AddShoppingCartIcon sx={{cursor: 'pointer', width: '100px'}}/>
+                <div onClick={openBasketHandler} style={{cursor: 'pointer'}}>
+                    <AddShoppingCartIcon sx={{width: '100px'}}/>
+                    {total > 0 && <div style={{marginLeft: '25px'}}>{total}</div> }
                 </div>
-
             </Toolbar>
         </AppBar>
     );

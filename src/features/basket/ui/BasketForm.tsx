@@ -1,6 +1,8 @@
 import React from 'react';
 import {Button, FormControl, FormGroup, Grid, Paper, TextField} from '@mui/material';
 import {useFormik} from 'formik';
+import {useAppDispatch, useAppSelector} from '../../../app/model/store';
+import {BasketItemType, basketProductActions} from '../model/basketProductSlice';
 
 type BasketForm = {
     name: string;
@@ -9,14 +11,27 @@ type BasketForm = {
     phone: number | string
 };
 
+export type OrderData = {
+    items: BasketItemType[];
+    total: number;
+    name: string;
+    surname: string;
+    address: string;
+    phone: string;
+}
+
 export const BasketForm = () => {
+
+    const items = useAppSelector((state) => state.basket.items);
+    const total = useAppSelector((state) => state.basket.total);
+    const dispatch = useAppDispatch()
 
     const formik = useFormik({
         initialValues: {
             name: "",
             surname: "",
             address: '',
-            phone: ''
+            phone: '',
         },
         validate: (values) => {
             const errors = {} as BasketForm
@@ -35,8 +50,13 @@ export const BasketForm = () => {
             return errors
         },
         onSubmit: (values) => {
-            console.log(values)
-            // dispatch(authThunks.signIn(values))
+            const orderData = {
+                ...values,
+                items: items,
+                total: total,
+            };
+            // console.log('Order placed:', values);
+            dispatch(basketProductActions.orderToSend(orderData))
         }
     })
 

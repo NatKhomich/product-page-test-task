@@ -3,10 +3,28 @@ import { ProductType } from '../../../app/ui/App';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 import {calculateTotalPrice} from '../../../common/utils/calculateTotalPrice';
+import {OrderData} from '../ui/BasketForm';
+
+const loadBasketFromLocalStorage = (): any => {
+    const storedBasket = localStorage.getItem('basket');
+    return storedBasket ? JSON.parse(storedBasket) : undefined;
+};
 
 export type BasketItemType = {
     id: string;
     quantity: number;
+};
+
+export type BasketState = {
+    productList: Partial<ProductType>[];
+    items: BasketItemType[];
+    total: number;
+};
+
+const initialState: BasketState = loadBasketFromLocalStorage() || {
+    productList: [],
+    items: [],
+    total: 0,
 };
 
 export const fetchProductList = createAsyncThunk(
@@ -25,11 +43,7 @@ export const fetchProductList = createAsyncThunk(
 
 const slice = createSlice({
     name: 'basketProduct',
-    initialState: {
-        productList: [] as Partial<ProductType>[],
-        items: [] as BasketItemType[],
-        total: 0,
-    },
+    initialState,
     reducers: {
         addToBasket: (state, action: PayloadAction<{ id: string }>) => {
             const currentItem = state.items.find((i) => i.id === action.payload.id);
@@ -61,6 +75,14 @@ const slice = createSlice({
             state.items = state.items.filter((item) => item.id !== action.payload.id);
             state.total = calculateTotalPrice(state.items, state.productList);
         },
+        orderToSend: (state, action: PayloadAction<OrderData>) => {
+            state.items = [];
+            state.total = 0;
+            // console.log('Order placed:', action.payload);
+            const jsonString = JSON.stringify(action.payload);
+            console.log(jsonString)
+        },
+
     },
     extraReducers: (builder) => {
         builder.addCase(fetchProductList.fulfilled, (state, action) => {

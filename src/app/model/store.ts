@@ -5,6 +5,7 @@ import {configureStore} from '@reduxjs/toolkit';
 import {authSlice} from '../../features/auth/model/authSlice';
 import {appSlice} from './appSlice';
 import {basketProductSlice} from '../../features/basket/model/basketProductSlice';
+import {localStorageMiddleware} from '../../common/utils/localStorageMiddleware';
 
 
 const rootReducer = combineReducers({
@@ -15,6 +16,13 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
     reducer: rootReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActionPaths: ['meta.arg', 'payload.timestamp'],
+                ignoredPaths: ['payload.timestamp'],
+            },
+        }).concat(localStorageMiddleware),
 });
 
 export type AppRootState = ReturnType<typeof store.getState>

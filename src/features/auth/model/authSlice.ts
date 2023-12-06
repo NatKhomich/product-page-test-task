@@ -1,14 +1,31 @@
 import {createSlice} from '@reduxjs/toolkit'
 import {createAppAsyncThunk} from '../../../common/utils/createAppAsyncThunk';
-import {signInWithEmailAndPassword, signInWithPopup, signOut} from 'firebase/auth';
+import {signInWithEmailAndPassword,createUserWithEmailAndPassword, signInWithPopup, signOut} from 'firebase/auth';
 import {auth, googleProvider} from '../../../config/firebase';
-import {RegistrationProps} from '../ui/login/Login';
 import {appActions} from '../../../app/model/appSlice';
+import {AuthProps} from '../ui/AuthForm';
 
+
+const register = createAppAsyncThunk<
+    { isLoggedIn: boolean },
+    AuthProps
+>('auth/login', async (arg, {dispatch, rejectWithValue}) => {
+    dispatch(appActions.setAppStatus({ status: 'loading' }))
+    try {
+        await createUserWithEmailAndPassword(auth, arg.email, arg.password);
+        return {isLoggedIn: true}
+    } catch (e) {
+        console.log(e);
+        return rejectWithValue(null)
+    }
+    finally {
+        dispatch(appActions.setAppStatus({ status: 'idle' }))
+    }
+})
 
 const signIn = createAppAsyncThunk<
     { isLoggedIn: boolean },
-    RegistrationProps
+    AuthProps
 >('auth/login', async (arg, {dispatch, rejectWithValue}) => {
     dispatch(appActions.setAppStatus({ status: 'loading' }))
     try {
@@ -101,7 +118,7 @@ const slice = createSlice({
 
 
 export const authSlice = slice.reducer
-export const authThunks = {logout, signInGoogle, signIn, checkAuthStatus}
+export const authThunks = {logout, signInGoogle, signIn, checkAuthStatus, register}
 
 // types
 export type AuthStateType = ReturnType<typeof slice.getInitialState>

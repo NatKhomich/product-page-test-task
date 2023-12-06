@@ -8,6 +8,8 @@ import {CircularProgress, LinearProgress} from '@mui/material';
 import {ProductsList} from '../../features/ProductsList/ui/ProductsList';
 import {Route, Routes} from 'react-router-dom';
 import {Basket} from '../../features/basket/ui/Basket/Basket';
+import {AuthForm} from '../../features/auth/ui/AuthForm';
+import {AuthPage} from '../../features/auth/ui/AuthPage';
 
 export type ProductType = {
     description: string
@@ -46,7 +48,7 @@ function App() {
             <div>
                 <Routes>
                     <Route path={'/'} element={<ProductsList/>}/>
-                    <Route path={'/login'} element={<Login/>}/>
+                    <Route path={'/login'} element={<AuthPage />}/>
                     <Route path={'/basket'} element={<Basket />}/>
                 </Routes>
             </div>

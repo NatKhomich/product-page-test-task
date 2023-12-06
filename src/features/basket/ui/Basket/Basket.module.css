@@ -1,0 +1,92 @@
+.container {
+    max-width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0 auto;
+
+}
+
+.productsContainer {
+    flex: 1;
+    width: 100%;
+}
+
+.product {
+    padding: 20px;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.titlePrice {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.title {
+    text-align: center;
+    font-size: 20px;
+    opacity: 0.8;
+}
+
+.productPhoto {
+    width: 150px;
+    align-items: center;
+    height: 200px;
+    object-fit: cover;
+}
+
+.price {
+    font-weight: bold;
+    opacity: 0.8;
+    font-size: 20px;
+    margin: 0 10px 15px 10px;
+}
+
+.form {
+    width: 400px;
+}
+
+.total {
+    font-size: 20px;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.emptyBasket {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+}
+
+.emptyBasketItem {
+    font-size: 30px;
+    opacity: 0.7;
+    font-weight: bold;
+}
+
+
+.paper {
+    display: flex;
+    padding: 20px;
+}
+
+.descriptionAndButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.button {
+    display: flex;
+    justify-content: space-evenly;
+}

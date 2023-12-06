@@ -1,8 +1,8 @@
-import {ProductType} from '../../App';
-import {BasketItem} from '../../features/basket/model/basketProductSlice';
+import {ProductType} from '../../app/ui/App';
+import {BasketItemType} from '../../features/basket/model/basketProductSlice';
 
 export const calculateTotalPrice = (
-    basketItems: BasketItem[],
+    basketItems: BasketItemType[],
     products: Partial<ProductType>[]
 ) => {
     let total = 0;

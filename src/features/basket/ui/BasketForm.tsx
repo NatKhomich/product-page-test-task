@@ -6,7 +6,7 @@ type BasketForm = {
     name: string;
     surname: string;
     address: string
-    phone: number
+    phone: number | string
 };
 
 export const BasketForm = () => {
@@ -27,10 +27,10 @@ export const BasketForm = () => {
                 errors.surname = "Required"
             }
             if (!values.address) {
-                errors.surname = "Required"
+                errors.address = "Required"
             }
             if (!values.phone) {
-                errors.surname = "Required"
+                errors.phone = "Required"
             }
             return errors
         },
@@ -48,31 +48,27 @@ export const BasketForm = () => {
                         <FormControl>
                             <FormGroup>
                                 <TextField label="name"
-                                           type="name"
                                            margin="normal"
                                            {...formik.getFieldProps("name")}
                                 />
                                 {formik.touched.name && formik.errors.name ?
                                     <div style={{ color: "red" }}>{formik.errors.name}</div> : null}
 
-                                <TextField type="surname"
-                                           label="surname"
+                                <TextField label="surname"
                                            margin="normal"
                                            {...formik.getFieldProps("surname")}
                                 />
                                 {formik.touched.surname && formik.errors.surname ?
                                     <div style={{ color: "red" }}>{formik.errors.surname}</div> : null}
 
-                                <TextField type="address"
-                                           label="address"
+                                <TextField label="address"
                                            margin="normal"
                                            {...formik.getFieldProps("address")}
                                 />
                                 {formik.touched.address && formik.errors.address ?
                                     <div style={{ color: "red" }}>{formik.errors.address}</div> : null}
 
-                                <TextField type="phone"
-                                           label="phone"
+                                <TextField label="phone"
                                            margin="normal"
                                            {...formik.getFieldProps("phone")}
                                 />

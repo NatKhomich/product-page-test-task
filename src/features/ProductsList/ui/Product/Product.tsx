@@ -1,5 +1,5 @@
 import React from 'react';
-import {ProductType} from '../../../../App';
+import {ProductType} from '../../../../app/ui/App';
 import {Button} from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import styles from './Product.module.css'

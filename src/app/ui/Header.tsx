@@ -46,10 +46,10 @@ export const Header = () => {
                 </Typography>
                 {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Logout</Button>}
 
-                <div onClick={openBasketHandler} style={{cursor: 'pointer'}}>
+                {isLoggedIn && <div onClick={openBasketHandler} style={{cursor: 'pointer'}}>
                     <AddShoppingCartIcon sx={{width: '100px'}}/>
                     {total > 0 && <div style={{marginLeft: '25px'}}>{total}</div> }
-                </div>
+                </div>}
             </Toolbar>
         </AppBar>
     );

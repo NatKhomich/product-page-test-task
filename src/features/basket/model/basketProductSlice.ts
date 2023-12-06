@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ProductType } from '../../../App';
+import { ProductType } from '../../../app/ui/App';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 import {calculateTotalPrice} from '../../../common/utils/calculateTotalPrice';
 
-export type BasketItem = {
+export type BasketItemType = {
     id: string;
     quantity: number;
 };
@@ -27,7 +27,7 @@ const slice = createSlice({
     name: 'basketProduct',
     initialState: {
         productList: [] as Partial<ProductType>[],
-        items: [] as BasketItem[],
+        items: [] as BasketItemType[],
         total: 0,
     },
     reducers: {

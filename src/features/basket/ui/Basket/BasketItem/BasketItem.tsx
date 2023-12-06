@@ -6,7 +6,7 @@ import {ProductType} from '../../../../../app/ui/App';
 import {BasketItemType, basketProductActions} from '../../../model/basketProductSlice';
 import {useAppDispatch} from '../../../../../app/model/store';
 
-type Props = {
+export type Props = {
     product: Partial<ProductType>
     item: BasketItemType
 }

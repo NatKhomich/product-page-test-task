@@ -3,3 +3,11 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
+import { TextDecoder, TextEncoder } from 'text-encoding-utf-8';
+
+
+global.TextDecoder = TextDecoder;
+//@ts-ignore
+global.TextEncoder = TextEncoder;
+
+

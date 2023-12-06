@@ -3,6 +3,9 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 300px;
 }
 
 .title {
@@ -13,7 +16,6 @@
 
 .productPhoto {
     width: 220px;
-    align-items: center;
     height: 250px;
     object-fit: cover;
 }

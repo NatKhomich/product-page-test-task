@@ -1,13 +1,13 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {checkAuthStatus} from '../../features/auth/model/authSlice';
+import {authThunks} from '../../features/auth/model/authSlice';
 
-export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed";
+export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed';
 
 const slice = createSlice({
     name: 'app',
     initialState: {
-        status: "idle" as RequestStatusType,
-        // error: null as string | null,
+        status: 'idle' as RequestStatusType,
+        error: null as string | null,
         isInitialized: false,
     },
     reducers: {
@@ -17,20 +17,23 @@ const slice = createSlice({
         setAppStatus: (state, action: PayloadAction<{ status: RequestStatusType }>) => {
             state.status = action.payload.status;
         },
+        setAppError: (state, action: PayloadAction<{ error: string | null }>) => {
+            state.error = action.payload.error
+        },
     },
     extraReducers: builder => {
         builder
-        .addCase(checkAuthStatus.pending, (state) => {
-            state.status = 'loading';
-        })
-        .addCase(checkAuthStatus.fulfilled, (state, action) => {
-            state.status = 'succeeded';
-        })
-        .addCase(checkAuthStatus.rejected, (state, action) => {
-            state.status = 'failed';
-        })
+            .addCase(authThunks.checkAuthStatus.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(authThunks.checkAuthStatus.fulfilled, (state, action) => {
+                state.status = 'succeeded';
+            })
+            .addCase(authThunks.checkAuthStatus.rejected, (state, action) => {
+                state.status = 'failed';
+            })
+    },
 
-    }
 })
 
 

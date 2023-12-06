@@ -6,7 +6,7 @@ import styles from './Product.module.css'
 import {useAppDispatch} from '../../../../app/model/store';
 import {basketProductActions} from '../../../basket/model/basketProductSlice';
 
-type Props = {
+export type Props = {
     item: Partial<ProductType>
 }
 

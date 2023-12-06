@@ -1,12 +1,11 @@
-import {useAppSelector} from '../../../app/model/store';
+import {useAppDispatch, useAppSelector} from '../../../app/model/store';
 import {useFormik} from 'formik';
-import {signInWithPopup} from 'firebase/auth';
-import {auth, googleProvider} from '../../../config/firebase';
 import {Navigate} from 'react-router-dom';
 import {FormControl, FormGroup, Grid, Paper, TextField} from '@mui/material';
 import React from 'react';
 import Button from '@mui/material/Button';
 import googleImg from '../../../common/image/registerGoogle.png'
+import {authThunks} from '../model/authSlice';
 
 type AuthFormProps = {
     title: string
@@ -20,7 +19,9 @@ export type AuthProps = {
 };
 
 export const AuthForm = ({title, buttonText, onSubmit }: AuthFormProps) => {
+
     const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+    const dispatch = useAppDispatch()
 
     const formik = useFormik({
         initialValues: {
@@ -52,13 +53,9 @@ export const AuthForm = ({title, buttonText, onSubmit }: AuthFormProps) => {
         },
     });
 
-    const signInGoogleHandler = async () => {
-        try {
-            await signInWithPopup(auth, googleProvider);
-        } catch (e) {
-            console.log(e);
+    const signInGoogleHandler =  () => {
+            dispatch(authThunks.signInGoogle());
         }
-    };
 
     if (isLoggedIn) {
         return <Navigate to={'/'} />;

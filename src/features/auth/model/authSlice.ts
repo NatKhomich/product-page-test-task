@@ -1,25 +1,23 @@
 import {createSlice} from '@reduxjs/toolkit'
 import {createAppAsyncThunk} from '../../../common/utils/createAppAsyncThunk';
-import {signInWithEmailAndPassword,createUserWithEmailAndPassword, signInWithPopup, signOut} from 'firebase/auth';
+import {signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, signOut} from 'firebase/auth';
 import {auth, googleProvider} from '../../../config/firebase';
 import {appActions} from '../../../app/model/appSlice';
 import {AuthProps} from '../ui/AuthForm';
 
-
 const register = createAppAsyncThunk<
     { isLoggedIn: boolean },
     AuthProps
->('auth/login', async (arg, {dispatch, rejectWithValue}) => {
-    dispatch(appActions.setAppStatus({ status: 'loading' }))
+>('auth/register', async (arg, {dispatch, rejectWithValue}) => {
+    dispatch(appActions.setAppStatus({status: 'loading'}))
     try {
         await createUserWithEmailAndPassword(auth, arg.email, arg.password);
         return {isLoggedIn: true}
     } catch (e) {
         console.log(e);
         return rejectWithValue(null)
-    }
-    finally {
-        dispatch(appActions.setAppStatus({ status: 'idle' }))
+    } finally {
+        dispatch(appActions.setAppStatus({status: 'idle'}))
     }
 })
 
@@ -27,54 +25,51 @@ const signIn = createAppAsyncThunk<
     { isLoggedIn: boolean },
     AuthProps
 >('auth/login', async (arg, {dispatch, rejectWithValue}) => {
-    dispatch(appActions.setAppStatus({ status: 'loading' }))
+    dispatch(appActions.setAppStatus({status: 'loading'}))
     try {
         await signInWithEmailAndPassword(auth, arg.email, arg.password);
         return {isLoggedIn: true}
-    } catch (e) {
-        console.log(e);
+    } catch (e: any) {
+        console.log(e.message);
         return rejectWithValue(null)
-    }
-    finally {
-        dispatch(appActions.setAppStatus({ status: 'idle' }))
+    } finally {
+        dispatch(appActions.setAppStatus({status: 'idle'}))
     }
 })
 
 const logout = createAppAsyncThunk<
     { isLoggedIn: boolean }
 >('auth/logout', async (_, {dispatch, rejectWithValue}) => {
-    dispatch(appActions.setAppStatus({ status: 'loading' }))
+    dispatch(appActions.setAppStatus({status: 'loading'}))
     try {
         await signOut(auth);
         return {isLoggedIn: false}
     } catch (e) {
         console.log(e);
         return rejectWithValue(null)
-    }
-    finally {
-        dispatch(appActions.setAppStatus({ status: 'idle' }))
+    } finally {
+        dispatch(appActions.setAppStatus({status: 'idle'}))
     }
 })
 
 const signInGoogle = createAppAsyncThunk<
     { isLoggedIn: boolean }
 >('auth/signInGoogle', async (_, {dispatch, rejectWithValue}) => {
-    dispatch(appActions.setAppStatus({ status: 'loading' }))
+    dispatch(appActions.setAppStatus({status: 'loading'}))
     try {
         await signInWithPopup(auth, googleProvider);
         return {isLoggedIn: true}
     } catch (e) {
         console.log(e);
         return rejectWithValue(null)
-    }
-    finally {
-        dispatch(appActions.setAppStatus({ status: 'idle' }))
+    } finally {
+        dispatch(appActions.setAppStatus({status: 'idle'}))
     }
 })
 
-export const checkAuthStatus = createAppAsyncThunk<{ isLoggedIn: boolean }, any>(
+const checkAuthStatus = createAppAsyncThunk<{ isLoggedIn: boolean }, any>(
     'auth/checkAuthStatus',
-    async (_, {dispatch ,rejectWithValue}) => {
+    async (_, {dispatch, rejectWithValue}) => {
         try {
             return await new Promise((resolve) => {
                 const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -86,9 +81,8 @@ export const checkAuthStatus = createAppAsyncThunk<{ isLoggedIn: boolean }, any>
         } catch (e) {
             console.log(e);
             return rejectWithValue(null);
-        }
-        finally {
-            dispatch(appActions.setAppInitialized({ isInitialized: true }));
+        } finally {
+            dispatch(appActions.setAppInitialized({isInitialized: true}));
         }
     }
 );
@@ -112,7 +106,10 @@ const slice = createSlice({
             })
             .addCase(logout.fulfilled, (state, action) => {
                 state.isLoggedIn = action.payload.isLoggedIn;
-            });
+            })
+            .addCase(register.fulfilled, (state, action) => {
+                state.isLoggedIn = action.payload.isLoggedIn;
+            })
     }
 })
 

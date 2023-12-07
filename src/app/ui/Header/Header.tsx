@@ -6,8 +6,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import {useAppDispatch, useAppSelector} from '../model/store';
-import {authThunks} from '../../features/auth/model/authSlice';
+import {useAppDispatch, useAppSelector} from '../../model/store';
+import {authThunks} from '../../../features/auth/model/authSlice';
 import {useNavigate} from 'react-router-dom';
 
 export const Header = () => {
@@ -48,7 +48,7 @@ export const Header = () => {
 
                 {isLoggedIn && <div onClick={openBasketHandler} style={{cursor: 'pointer'}}>
                     <AddShoppingCartIcon sx={{width: '100px'}}/>
-                    {total > 0 && <div style={{marginLeft: '25px'}}>{total}</div> }
+                    {total > 0 && <div style={{marginLeft: '25px'}}>{total}р</div> }
                 </div>}
             </Toolbar>
         </AppBar>

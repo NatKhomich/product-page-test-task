@@ -12,7 +12,7 @@ beforeEach(() => {
 })
 
 test("correct error message should be set", () => {
-    const endState = appSlice(startState, appActions.setAppError({ error: "some error" }))
+    const endState = appSlice(startState, appActions.setAppError("some error" ))
 
     expect(endState.error).toBe("some error")
 })

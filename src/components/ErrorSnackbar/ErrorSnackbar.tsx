@@ -18,7 +18,7 @@ export const ErrorSnackbar = () => {
         if (reason === 'clickaway') {
             return
         }
-        dispatch(appActions.setAppError({error: null}))
+        dispatch(appActions.setAppError(null))
     };
 
     return (

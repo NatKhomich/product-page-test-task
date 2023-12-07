@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import {Header} from './Header';
+import {Header} from './Header/Header';
 import {useAppDispatch, useAppSelector} from '../model/store';
 import {authThunks} from '../../features/auth/model/authSlice';
 import {CircularProgress, LinearProgress} from '@mui/material';
@@ -26,12 +26,8 @@ function App() {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        const checkStatus = async () => {
-            await dispatch(authThunks.checkAuthStatus({}));
-        }
-        checkStatus()
-        console.log('google login')
-    }, [dispatch]);
+         dispatch(authThunks.checkAuthStatus({}));
+    }, []);
 
 
     if (!isInitialized) {

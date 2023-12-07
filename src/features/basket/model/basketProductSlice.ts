@@ -78,7 +78,6 @@ const slice = createSlice({
         orderToSend: (state, action: PayloadAction<OrderData>) => {
             state.items = [];
             state.total = 0;
-            // console.log('Order placed:', action.payload);
             const jsonString = JSON.stringify(action.payload);
             console.log(jsonString)
         },
@@ -87,7 +86,6 @@ const slice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(fetchProductList.fulfilled, (state, action) => {
             state.productList = action.payload;
-            // После успешного получения продуктов, обнови total
             state.total = calculateTotalPrice(state.items, action.payload);
         });
     },

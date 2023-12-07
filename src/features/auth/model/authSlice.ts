@@ -31,6 +31,7 @@ const signIn = createAppAsyncThunk<
         return {isLoggedIn: true}
     } catch (e: any) {
         console.log(e.message);
+        dispatch(appActions.setAppError(e.message))
         return rejectWithValue(null)
     } finally {
         dispatch(appActions.setAppStatus({status: 'idle'}))

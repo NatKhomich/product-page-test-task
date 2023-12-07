@@ -31,8 +31,8 @@ export const Basket = () => {
           })}
         </div>
 
-        <div>
-          {total > 0 && <p>Total Price: {total} руб</p>}
+        <div className={styles.form}>
+          {total > 0 && <p className={styles.total}>Total Price: {total} rub</p>}
           <BasketForm />
         </div>
       </Box>

@@ -1,36 +1,39 @@
-import React, {useEffect} from 'react';
-import {Product} from './Product/Product';
-import {Grid, Paper} from '@mui/material';
-import {Navigate} from 'react-router-dom';
-import {useAppDispatch, useAppSelector} from '../../../app/model/store';
-import {productThunks} from '../model/productSlice';
+import React, { useEffect } from "react"
+import { Product } from "./Product/Product"
+import { Box, Grid, Paper } from "@mui/material"
+import { Navigate } from "react-router-dom"
+import { useAppDispatch, useAppSelector } from "../../../app/model/store"
+import { productThunks } from "../model/productSlice"
+import styles from "./ProductsList.module.css"
+import { selectAuthIsLoggedIn } from "../../auth/model/authSelectors"
+import { selectProductList } from "../model/productSelectors"
 
 export const ProductsList = () => {
 
-    const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
-    const productList = useAppSelector((state) => state.product.productList);
-    const dispatch = useAppDispatch()
+  const isLoggedIn = useAppSelector(selectAuthIsLoggedIn)
+  const productList = useAppSelector(selectProductList)
+  const dispatch = useAppDispatch()
 
-    useEffect(() => {
-        dispatch(productThunks.fetchProductList())
-    }, [])
+  useEffect(() => {
+    dispatch(productThunks.fetchProductList())
+  }, [])
 
-    if (!isLoggedIn) {
-        return <Navigate to={"/login"} />
-    }
+  if (!isLoggedIn) {
+    return <Navigate to={"/login"} />
+  }
 
-    return (
-        <div className="lists">
-                {productList.map(p => {
-                    return (
-                        <Grid item key={p.id} className={'product'}>
-                            <Paper>
-                                <Product item={p}/>
-                            </Paper>
-                        </Grid>
-                    )
-                })}
-        </div>
-    );
-};
+  return (
+    <Box className={styles.lists}>
+      {productList.map(p => {
+        return (
+          <Grid item key={p.id}>
+            <Paper>
+              <Product item={p} />
+            </Paper>
+          </Grid>
+        )
+      })}
+    </Box>
+  )
+}
 

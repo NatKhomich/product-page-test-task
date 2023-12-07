@@ -1,6 +1,6 @@
 import React from "react"
 import { Paper } from "@mui/material"
-import styles from "../Basket.module.css"
+import styles from "./BasketItem.module.css"
 import Button from "@mui/material/Button"
 import { basketActions, BasketItemType } from "../../../model/basketSlice"
 import { useAppDispatch } from "../../../../../app/model/store"
@@ -25,20 +25,25 @@ export const BasketItem = ({ product, item }: Props) => {
   return (
     <Paper className={styles.paper}>
       <img className={styles.productPhoto} src={product.photo} alt="photo" />
-      <div>
+
+      <div className={styles.description}>
         <h3 className={styles.title}>{product.title}</h3>
-        <p className={styles.price}>Price: {product.price} руб</p>
-        <p className={styles.price}>Quantity: {item.quantity} </p>
-        <div>
+        <p className={styles.priceAndQuantity}>Price: {product.price} rub</p>
+        <p className={styles.priceAndQuantity}>Quantity: {item.quantity} </p>
+
+        <div className={styles.btn}>
           <Button variant="contained" color={"secondary"}
                   onClick={() => decreaseQuantity(item.id)}>
             -
           </Button>
+
           <Button variant="contained" color={"secondary"}
                   onClick={() => increaseQuantity(item.id)}>
             +
           </Button>
         </div>
+
+
       </div>
     </Paper>
   )

@@ -8,7 +8,7 @@ type Props = {
   onSubmit: (values: AuthProps) => void;
 }
 
-export const useAuthForm = ({onSubmit}: Props) => {
+export const useAuthForm = ({ onSubmit }: Props) => {
 
   const isLoggedIn = useAppSelector(selectAuthIsLoggedIn)
   const dispatch = useAppDispatch()

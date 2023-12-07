@@ -1,16 +1,9 @@
-import {ProductType} from '../../app/ui/App';
-import {BasketItemType} from '../../features/basket/model/basketProductSlice';
+import {BasketItemType} from '../../features/basket/model/basketSlice';
 
-export const calculateTotalPrice = (
-    basketItems: BasketItemType[],
-    products: Partial<ProductType>[]
-) => {
+export const calculateTotalPrice = (basketItems: BasketItemType[]) => {
     let total = 0;
     basketItems.forEach((item) => {
-        const product = products.find((p) => p.id === item.id);
-        if (product && product.price) {
-            total += product.price * item.quantity;
-        }
+        total += item.price * item.quantity;
     });
     return total;
 };

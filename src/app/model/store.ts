@@ -4,14 +4,16 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {configureStore} from '@reduxjs/toolkit';
 import {authSlice} from '../../features/auth/model/authSlice';
 import {appSlice} from './appSlice';
-import {basketProductSlice} from '../../features/basket/model/basketProductSlice';
+import {basketSlice} from '../../features/basket/model/basketSlice';
 import {localStorageMiddleware} from '../../common/utils/localStorageMiddleware';
+import {productSlice} from '../../features/ProductsList/model/productSlice';
 
 
 const rootReducer = combineReducers({
     auth: authSlice,
     app: appSlice,
-    basket: basketProductSlice
+    basket: basketSlice,
+    product: productSlice
 })
 
 export const store = configureStore({

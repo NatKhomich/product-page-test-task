@@ -3,16 +3,16 @@ import {Product} from './Product/Product';
 import {Grid, Paper} from '@mui/material';
 import {Navigate} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../../app/model/store';
-import {basketProductThunks} from '../../basket/model/basketProductSlice';
+import {productThunks} from '../model/productSlice';
 
 export const ProductsList = () => {
 
     const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
-    const productList = useAppSelector((state) => state.basket.productList);
+    const productList = useAppSelector((state) => state.product.productList);
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(basketProductThunks.fetchProductList())
+        dispatch(productThunks.fetchProductList())
     }, [])
 
     if (!isLoggedIn) {

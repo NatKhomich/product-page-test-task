@@ -1,9 +1,9 @@
 import React from 'react';
-import { Story, Meta } from '@storybook/react';
-import { BasketItem, Props } from '../../features/basket/ui/Basket/BasketItem/BasketItem';
-import { ReduxProviderDecorator } from '../decorators';
-import { Provider } from 'react-redux';
-import { store } from '../../app/model/store';
+import {Meta, Story} from '@storybook/react';
+import {BasketItem, Props} from '../../features/basket/ui/Basket/BasketItem/BasketItem';
+import {ReduxProviderDecorator} from '../decorators';
+import {Provider} from 'react-redux';
+import {store} from '../../app/model/store';
 
 export default {
     title: 'Components/BasketItem',
@@ -28,6 +28,7 @@ BasketItemExample.args = {
     },
     item: {
         id: '1',
-        quantity: 2
+        quantity: 2,
+        price: 0
     }
 };

@@ -1,20 +1,20 @@
 import React from 'react';
-import {ProductType} from '../../../../app/ui/App';
 import {Button} from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import styles from './Product.module.css'
 import {useAppDispatch} from '../../../../app/model/store';
-import {basketProductActions} from '../../../basket/model/basketProductSlice';
+import {basketActions} from '../../../basket/model/basketSlice';
+import {ProductProps} from '../../model/productSlice';
 
 export type Props = {
-    item: Partial<ProductType>
+    item: Partial<ProductProps>
 }
 
 export const Product = ({item}: Props) => {
     const dispatch = useAppDispatch();
 
-    const addToBasketHandler = (id: string) => {
-        dispatch(basketProductActions.addToBasket({id}));
+    const addToBasketHandler = (id: string, price: number) => {
+        dispatch(basketActions.addToBasket({id, price}));
     }
 
     return (
@@ -24,7 +24,7 @@ export const Product = ({item}: Props) => {
             <p className={styles.description}>{item.description}</p>
             <p className={styles.price}>Price: {item.price} руб</p>
 
-            <div onClick={() => addToBasketHandler(item.id ? item.id : '')}>
+            <div onClick={() => addToBasketHandler(item.id ? item.id : '', item.price ? item.price : 0)}>
                 <Button variant={'contained'}
                         color={'secondary'}
                 >

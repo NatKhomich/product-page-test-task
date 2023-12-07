@@ -13,8 +13,8 @@ export const AuthPage = () => {
     return (
         <Grid container justifyContent={'center'} position={'relative'}>
             {isLoginFormVisible ? <Login /> : <Register />}
-            <Button variant={'contained'} sx={{ marginTop: '20px' }} color={'success'}
-                    style={{position: 'absolute', bottom: '-50px'}}
+            <Button variant={'contained'} sx={{ marginTop: '20px', position: 'absolute', bottom: '-50px' }}
+                    color={'success'}
                     onClick={toggleForm}>
                 {isLoginFormVisible ? 'Create a new account' : 'Back to Login'}
             </Button>

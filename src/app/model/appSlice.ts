@@ -1,5 +1,4 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {authThunks} from '../../features/auth/model/authSlice';
+import { createSlice, isFulfilled, isPending, isRejected, PayloadAction } from "@reduxjs/toolkit"
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed';
 
@@ -23,15 +22,21 @@ const slice = createSlice({
     },
     extraReducers: builder => {
         builder
-            .addCase(authThunks.checkAuthStatus.pending, (state) => {
-                state.status = 'loading';
-            })
-            .addCase(authThunks.checkAuthStatus.fulfilled, (state, action) => {
-                state.status = 'succeeded';
-            })
-            .addCase(authThunks.checkAuthStatus.rejected, (state, action) => {
-                state.status = 'failed';
-            })
+            .addMatcher(
+                isPending,
+                (state) => {
+                    state.status = "loading"
+                })
+            .addMatcher(
+                isRejected,
+                (state) => {
+                    state.status = "failed"
+                })
+            .addMatcher(
+                isFulfilled,
+                (state) => {
+                    state.status = "succeeded"
+                })
     },
 
 })

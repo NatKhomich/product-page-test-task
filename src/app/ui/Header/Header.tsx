@@ -9,6 +9,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {useAppDispatch, useAppSelector} from '../../model/store';
 import {authThunks} from '../../../features/auth/model/authSlice';
 import {useNavigate} from 'react-router-dom';
+import {Box} from '@mui/material';
 
 export const Header = () => {
 
@@ -30,26 +31,16 @@ export const Header = () => {
     }
 
     return (
-        <AppBar position="static" sx={{ background: '#563c86' }}>
+        <AppBar sx={{ background: '#563c86', position: "static" }}>
             <Toolbar>
-                <IconButton
-                    size="large"
-                    edge="start"
-                    color="inherit"
-                    aria-label="menu"
-                    sx={{ mr: 2 }}
-                >
-                    <MenuIcon />
-                </IconButton>
                 <Typography onClick={openProductHandler} variant="h6" component="div" sx={{ flexGrow: 1 , cursor: 'pointer'}}>
                     Product
                 </Typography>
                 {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Logout</Button>}
-
-                {isLoggedIn && <div onClick={openBasketHandler} style={{cursor: 'pointer'}}>
+                {isLoggedIn && <Box onClick={openBasketHandler} sx={{cursor: 'pointer'}}>
                     <AddShoppingCartIcon sx={{width: '100px'}}/>
-                    {total > 0 && <div style={{marginLeft: '25px'}}>{total}р</div> }
-                </div>}
+                    {total > 0 && <Box sx={{marginLeft: '25px'}}>{total}р</Box> }
+                </Box>}
             </Toolbar>
         </AppBar>
     );

@@ -19,7 +19,6 @@ function App() {
     dispatch(authThunks.checkAuthStatus({}))
   }, [])
 
-
   if (!isInitialized) {
     return <Box sx={{ position: "fixed", top: "30%", textAlign: "center", width: "100%" }}>
       <CircularProgress />

@@ -1,12 +1,12 @@
 .paper {
     display: flex;
-    width: 400px;
+    width: 300px;
     justify-content: space-evenly;
     padding: 10px;
 }
 
 .productPhoto {
-    width: 150px;
+    width: 120px;
     align-items: center;
     height: 200px;
     object-fit: cover;

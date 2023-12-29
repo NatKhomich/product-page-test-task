@@ -1,6 +1,5 @@
 import React from "react"
 import { Box } from "@mui/material"
-import styles from "./BasketItem.module.css"
 import Button from "@mui/material/Button"
 import { basketActions, BasketItemType } from "../../../model/basketSlice"
 import { useAppDispatch } from "../../../../../app/model/store"
@@ -29,7 +28,7 @@ export const BasketItem = ({ product, item }: Props) => {
            alt="photo" />
 
       <Box ml="30px" width="200px" height='100%'>
-        <Typography variant="h4" fontSize="20px" textAlign="center"> {product.title}</Typography>
+        <Typography variant="h4" fontSize="20px"> {product.title}</Typography>
         <Typography variant="h6" m='5px 0'>Price: {product.price} rub</Typography>
         <Typography variant="h6">Quantity: {item.quantity} </Typography>
 

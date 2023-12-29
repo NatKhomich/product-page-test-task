@@ -30,8 +30,8 @@ export const Basket = () => {
           })}
         </Box>
 
-        <Box >
-          {total > 0 && <Typography>Total Price: {total} rub</Typography>}
+        <Box>
+          {total > 0 && <Typography fontSize='20px'>Total Price: {total} rub</Typography>}
           <BasketForm />
         </Box>
       </Box>

@@ -4,7 +4,6 @@ import { Box, Grid, Paper } from "@mui/material"
 import { Navigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../../app/model/store"
 import { productThunks } from "../model/productSlice"
-import styles from "./ProductsList.module.css"
 import { selectAuthIsLoggedIn } from "../../auth/model/authSelectors"
 import { selectProductList } from "../model/productSelectors"
 
@@ -23,7 +22,7 @@ export const ProductsList = () => {
   }
 
   return (
-    <Box className={styles.lists}>
+    <Box display='flex' flexWrap='wrap' justifyContent='space-evenly' mt='20px'>
       {productList.map(p => {
         return (
           <Grid item key={p.id}>

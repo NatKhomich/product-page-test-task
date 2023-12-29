@@ -1,11 +1,11 @@
 import React from "react"
 import { Navigate } from "react-router-dom"
 import { useAppSelector } from "../../../../app/model/store"
-import styles from "./Basket.module.css"
 import { BasketForm } from "../BasketForm"
 import { BasketItem } from "./BasketItem/BasketItem"
 import basketImg from "../../../../common/image/emptyshopping.jpg"
-import { Box } from "@mui/material"
+import { Box, Paper } from "@mui/material"
+import Typography from "@mui/material/Typography"
 
 export const Basket = () => {
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn)
@@ -19,25 +19,27 @@ export const Basket = () => {
 
   return (
     total > 0 ?
-      <Box className={styles.container}>
-        <div>
+      <Box display="flex" flexWrap="wrap" justifyContent="space-evenly" alignItems="center" minHeight="90vh">
+        <Box  m="20px">
           {basketItems.map(item => {
             const product = productList.find((p) => p.id === item.id)
-            return (
-              <div key={item.id} className={styles.product}>
-                {product && <BasketItem product={product} item={item} />}
-              </div>
-            )
+            return <Box key={item.id}>
+              {product &&
+                <Paper><BasketItem product={product} item={item} /></Paper>}
+            </Box>
           })}
-        </div>
+        </Box>
 
-        <div className={styles.form}>
-          {total > 0 && <p className={styles.total}>Total Price: {total} rub</p>}
+        <Box >
+          {total > 0 && <Typography>Total Price: {total} rub</Typography>}
           <BasketForm />
-        </div>
+        </Box>
       </Box>
 
-      : <img className={styles.basketImg} src={basketImg} alt="img" />
+      :
+      <Box minHeight="90vh" display="flex" alignItems="center">
+        <img style={{ maxWidth: "100%", margin: "10px auto" }} src={basketImg} alt="basket" />
+      </Box>
 
   )
 }

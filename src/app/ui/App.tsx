@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { Header } from "./Header/Header"
 import { useAppDispatch, useAppSelector } from "../model/store"
 import { authThunks } from "../../features/auth/model/authSlice"
-import { Box, CircularProgress, LinearProgress } from "@mui/material"
+import { Box, CircularProgress, Container, LinearProgress } from "@mui/material"
 import { ErrorSnackbar } from "../../components/ErrorSnackbar/ErrorSnackbar"
 import { selectAppIsInitialized, selectAppStatus } from "../model/appSelectors"
 import { Routing } from "./Routing/Routing"
@@ -28,9 +28,13 @@ function App() {
   return (
     <>
       <Header />
-      {status === "loading" && <LinearProgress color={"primary"} />}
-      <Routing />
-      <ErrorSnackbar />
+
+      <Container>
+        {status === "loading" && <LinearProgress color={"primary"} />}
+        <Routing />
+        <ErrorSnackbar />
+      </Container>
+
     </>
   )
 }

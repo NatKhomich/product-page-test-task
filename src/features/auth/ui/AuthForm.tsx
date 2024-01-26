@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom"
 import { Box, FormControl, FormGroup, Grid, Paper, TextField } from "@mui/material"
 import React from "react"
 import Button from "@mui/material/Button"
-import googleImg from "../../../common/image/registerGoogle.png"
+import googleImg from "../../../assets/images/registerGoogle.png"
 import Typography from "@mui/material/Typography"
 import { useAuthForm } from "../lib/useAuthForm"
 

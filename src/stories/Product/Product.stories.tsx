@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
-import { Product, Props } from '../../features/ProductsList/ui/Product/Product';
+import { Product, Props } from '../../features/productsList/ui/Product/Product';
 import { ReduxProviderDecorator } from '../decorators';
 import { Provider } from 'react-redux';
 import { store } from '../../app/model/store';

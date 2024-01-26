@@ -3,7 +3,7 @@ import { Box } from "@mui/material"
 import Button from "@mui/material/Button"
 import { basketActions, BasketItemType } from "../../../model/basketSlice"
 import { useAppDispatch } from "../../../../../app/model/store"
-import { ProductProps } from "../../../../ProductsList/model/productSlice"
+import { ProductProps } from "../../../../productsList/model/productSlice"
 import Typography from "@mui/material/Typography"
 
 export type Props = {

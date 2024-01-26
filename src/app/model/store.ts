@@ -6,7 +6,7 @@ import { authSlice } from "../../features/auth/model/authSlice"
 import { appSlice } from "./appSlice"
 import { basketSlice } from "../../features/basket/model/basketSlice"
 import { localStorageMiddleware } from "../../common/utils/localStorageMiddleware"
-import { productSlice } from "../../features/ProductsList/model/productSlice"
+import { productSlice } from "../../features/productsList/model/productSlice"
 
 
 const rootReducer = combineReducers({

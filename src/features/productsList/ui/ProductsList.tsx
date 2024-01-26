@@ -3,9 +3,9 @@ import { Product } from "./Product/Product"
 import { Box, Grid, Paper } from "@mui/material"
 import { Navigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../../../app/model/store"
-import { productThunks } from "../model/productSlice"
 import { selectAuthIsLoggedIn } from "../../auth/model/authSelectors"
 import { selectProductList } from "../model/productSelectors"
+import { productThunks } from "../model/productSlice"
 
 export const ProductsList = () => {
 
@@ -22,7 +22,7 @@ export const ProductsList = () => {
   }
 
   return (
-    <Box display='flex' flexWrap='wrap' justifyContent='space-evenly' mt='20px'>
+    <Box display='flex' flexWrap='wrap' justifyContent='space-evenly' mt='80px'>
       {productList.map(p => {
         return (
           <Grid item key={p.id}>

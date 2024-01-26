@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom"
 import { useAppSelector } from "../../../../app/model/store"
 import { BasketForm } from "../BasketForm"
 import { BasketItem } from "./BasketItem/BasketItem"
-import basketImg from "../../../../common/image/emptyshopping.jpg"
+import basketImg from "../../../../assets/images/emptyshopping.jpg"
 import { Box, Paper } from "@mui/material"
 import Typography from "@mui/material/Typography"
 
@@ -19,7 +19,7 @@ export const Basket = () => {
 
   return (
     total > 0 ?
-      <Box display="flex" flexWrap="wrap" justifyContent="space-evenly" alignItems="center" minHeight="90vh">
+      <Box display="flex" flexWrap="wrap" justifyContent="space-evenly" minHeight="90vh" mt={'60px'}>
         <Box  m="20px">
           {basketItems.map(item => {
             const product = productList.find((p) => p.id === item.id)
@@ -30,8 +30,8 @@ export const Basket = () => {
           })}
         </Box>
 
-        <Box>
-          {total > 0 && <Typography fontSize='20px'>Total Price: {total} rub</Typography>}
+        <Box mt={'60px'}>
+          {total > 0 && <Typography fontSize='20px' mb={'10px'}>Total Price: {total} rub</Typography>}
           <BasketForm />
         </Box>
       </Box>

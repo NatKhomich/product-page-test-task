@@ -11,5 +11,5 @@ export const Login = () => {
     dispatch(authThunks.signIn(values))
   }
 
-  return <AuthForm title={"Login"} buttonText="Login" onSubmit={handleLoginSubmit} />
+  return <AuthForm title={"Log in to account"} buttonText="Login" onSubmit={handleLoginSubmit} />
 }

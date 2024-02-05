@@ -10,5 +10,5 @@ export const Register = () => {
     dispatch(authThunks.register(values))
   }
 
-  return <AuthForm title={"Register"} buttonText="Register" onSubmit={handleRegisterSubmit} />
+  return <AuthForm title={"Registration"} buttonText="Register" onSubmit={handleRegisterSubmit} />
 }

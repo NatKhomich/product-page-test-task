@@ -1,14 +1,10 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](product-page-test-task.firebaseapp.com).
-
-https://product-page-test-task.firebaseapp.com/ 
-
 ## Description
 
 Product-page-test-task is a registration and authentication platform that allows users to sign up using email/password or Google services. The app also provides authorization through these methods. Users can access product listings, add items to their cart, and place orders, with the order details saved in JSON format.
 
-## Link to my application: https://product-page-test-task.web.app
+## Link to my application: https://product-page-test-task.firebaseapp.com
 
 ## Technologies Used
 
